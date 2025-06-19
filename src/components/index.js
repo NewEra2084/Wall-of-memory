@@ -1,0 +1,5 @@
+export {Header} from "./header"
+export {Aside} from "./aside"
+export {HeroesPanel} from "./heroesPanel"
+export {InfoPanel} from "./infoPanel"
+export {VirtualKeyboard} from "./VirtualKeyboard"
