@@ -12,17 +12,32 @@
 }
 
 @theme {
-  --shadow-white-hero: inset -100px 0 100px -50px white;
+  --animate-asideOpening: 1s ease-out asideOpening;
+  @keyframes asideOpening {
+    0%:{
+      transform: translate(-508px);
+    }
+    100%{
+      transform: translate(0px);
+    }
+  }
 }
 
+html{
+  height: 100%;
+}
 body {
   margin: 0;
+  height: 100%;
   font-family: 'Times New Roman', Times, serif;
 }
 .bg{
   background: url("../media/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
+}
+.scrollHand{
+  left: var(--move-x);
 }
 .scrollPanel::-webkit-scrollbar{
   display: none;

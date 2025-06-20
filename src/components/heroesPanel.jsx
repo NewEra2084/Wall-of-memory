@@ -1,7 +1,9 @@
+import { ScrollHandler } from "../logic";
+
 export function HeroesPanel() {
   return (
-    <div className="overflow-x-scroll shadow-white-hero">
-      <div className="bg-amber-200 w-[2500px] h-[450px]"></div>
+    <div className="overflow-x-scroll" onScroll={(e) => ScrollHandler(e)}>
+      <div className="bg-none w-[2500px] h-[500px]"></div>
     </div>
   );
 }

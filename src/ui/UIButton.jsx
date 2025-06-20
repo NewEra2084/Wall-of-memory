@@ -1,3 +1,14 @@
+/**
+ *
+ * @param {{
+ * className: string,
+ * variant: 'active' | 'unactive',
+ * onClick: Function
+ * children: ReactElement
+ * }} props
+ * @returns
+ */
+
 export function UIButton({ className, variant, onClick, children }) {
   const variantOfButton = {
     active: "bg-[#CF3337] text-white",
@@ -6,7 +17,7 @@ export function UIButton({ className, variant, onClick, children }) {
   return (
     <button
     onClick={onClick}
-      className={`px-8 py-6 w-[280px] h-[69px] gap-4 text-[18px] flex items-center justify-center text-nowrap ${variantOfButton} ${className}`}
+      className={`px-8 py-6 min-w-[280px] h-[69px] gap-4 text-[18px] flex items-center justify-center text-nowrap box-border ${variantOfButton} ${className}`}
     >
       {children}
     </button>

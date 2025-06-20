@@ -1,16 +1,18 @@
-import { useState } from "react";
-import { Aside, Header, HeroesPanel, InfoPanel } from "./components/";
-import "./styles/index.css";
+import { Route, Routes } from "react-router";
+import MainPage from "./pages/mainPage";
+import SearchPage from "./pages/searchPage";
+import Layout from "./pages/layout";
+import HeroPage from "./pages/heroPage";
 
 function App() {
-    const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="bg w-[100vw] h-[100vh] pl-[80px] py-[80px] box-border">
-      <Header />
-      <InfoPanel setIsOpenState={setIsOpen}></InfoPanel>
-      <HeroesPanel></HeroesPanel>
-      {isOpen?<Aside setIsOpenState={setIsOpen}></Aside> : ""}
-    </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainPage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="hero" element={<HeroPage />} />
+        </Route>
+      </Routes>
   );
 }
 

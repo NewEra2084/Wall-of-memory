@@ -4,4 +4,5 @@ import move from "./move.svg"
 import search from "./search.svg"
 import logo from "./logo.svg"
 import medal from "./medal.svg"
-export {filter, filterActive, move, search, logo, medal}
+import closeCross from "./closeCross.svg"
+export {filter, filterActive, move, search, logo, medal, closeCross}
