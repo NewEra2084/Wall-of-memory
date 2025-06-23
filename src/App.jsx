@@ -3,14 +3,16 @@ import MainPage from "./pages/mainPage";
 import SearchPage from "./pages/searchPage";
 import Layout from "./pages/layout";
 import HeroPage from "./pages/heroPage";
+import { useState } from "react";
 
 function App() {
+  const [filters, setFilters] = useState({filterName: ""});
   return (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage />} />
-          <Route path="search" element={<SearchPage />} />
-          <Route path="hero" element={<HeroPage />} />
+          <Route index element={<MainPage heroes={filters}/>} />
+          <Route path="search" element={<SearchPage filterString={setFilters}/>} />
+          <Route path="hero/:id" element={<HeroPage />} />
         </Route>
       </Routes>
   );

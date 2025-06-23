@@ -1,8 +1,6 @@
 import logo from "../media/logo.svg";
 import {Link} from "react-router"
-export function Header({fontsColor}) {
-  console.log(fontsColor);
-  
+export function Header({fontsColor}) {  
   return (
     <>
       <div className="flex items-center mb-12">
