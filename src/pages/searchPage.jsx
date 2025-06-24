@@ -27,8 +27,8 @@ function SearchPage({ filterString }) {
         <input
           type="text"
           onClick={() => setIsSearching(true)}
-          onChange={(e) => setSearchText(e.target.value.toString())}
           value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
           className="bg-none border-b-2 text-[32px] border-b-[#C1A886] italic placeholder:text-white focus:outline-0 w-[872px] py-4 px-8 relative text-white after:"
           placeholder="Кого вы ищите?"
         ></input>

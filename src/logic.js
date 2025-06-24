@@ -26,5 +26,13 @@ async function getHero(id, setter){
   const res = await req.json();  
   setter(res)
 }
+async function getFilters(setter){
+  const req = await fetch(
+    `https://book-memory-sections-out.itlabs.top/api/members/filters/get`
+  );
+  const res = await req.json();
+  setter(res);
+  
+}
 
-export { ScrollHandler, getData, getHero };
+export { ScrollHandler, getData, getHero, getFilters };

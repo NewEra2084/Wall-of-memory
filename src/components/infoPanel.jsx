@@ -3,8 +3,6 @@ import { filter, filterActive, move, search } from "../media/";
 import { Link } from "react-router";
 
 export function InfoPanel({ setIsOpenState, heroesFilter, isFiltered = false }) {
-  console.log(heroesFilter);
-  
   return (
     <div className="flex items-center gap-4 tracking-[2px] mb-10">
       <Link to="search">

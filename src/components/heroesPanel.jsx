@@ -35,7 +35,7 @@ export function HeroesPanel({ heroesFilter }) {
         ScrollHandler(e);
       }}
     >
-      <div className="h-[570px] flex">
+      <div className="h-[570px] flex w-fit">
         <div
           className={`bg-[url(${
             heroes[0]?.image || image
@@ -44,7 +44,7 @@ export function HeroesPanel({ heroesFilter }) {
           <div className="bg-linear-to-t from-0% from-[#262421] to-30% to-[rgba(38, 36, 33, 0)] z-10 absolute inset-0"></div>
           <h3 className="pb-6 px-6 z-10">{heroes[0]?.name}</h3>
         </div>
-        <div className={`grid grid-cols-${panelWidth} grid-rows-2 gap-y-4`}>
+        <div className={`grid grid-rows-2 gap-y-4`} style={{gridTemplateColumns: `repeat(${panelWidth}, 250px)`}}>
           {heroes.map((item, id) => {
             if (id === 0) return;
             return (
