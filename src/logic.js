@@ -5,34 +5,56 @@ function ScrollHandler(e, setter) {
   ).toFixed(0);
   const scrollLine =
     document.querySelector(".scrollHand").parentElement.offsetWidth;
-  if (scrollPercent >= 90) {setter(true); return;}
+  if (scrollPercent >= 90) {
+    setter(true);
+    return;
+  }
 
   Object.assign(document.querySelector(".scrollHand"), {
     style: `--move-x: ${(scrollLine * scrollPercent) / 100}px`,
   });
 }
 
-async function getData(setter, yearStart, yearEnd, ranks, word, page, name) {
+async function getData(
+  setter,page, setPage,
+  {
+    filterName = "",
+    searchFrom = "",
+    searchTo = "",
+    chosenRanks = "",
+    chosenWord = "",
+  }
+) {
+  console.log(page);
+  
   const req = await fetch(
-    `https://book-memory-sections-out.itlabs.top/api/members`
+    encodeURI(
+        `https://book-memory-sections-out.itlabs.top/api/members?page=${page}&itemsPerPage=16${
+          searchFrom ? "&yearStart=" + searchFrom : ""
+        }${searchTo ? "&yearEnd=" + searchTo : ""}${
+          chosenRanks[0] ? "&ranks=" + chosenRanks : ""
+        }${chosenWord ? "&word=" + chosenWord : ""}${
+          filterName ? "&name=" + filterName : ""
+        }`
+      )
   );
-  const res = await req.json();  
-  setter(res)
+  const res = await req.json();
+  setPage((prev)=> prev + 1)
+  setter(res);
 }
-async function getHero(id, setter){
+async function getHero(id, setter) {
   const req = await fetch(
     `https://book-memory-sections-out.itlabs.top/api/members/${id}`
   );
-  const res = await req.json();  
-  setter(res)
+  const res = await req.json();
+  setter(res);
 }
-async function getFilters(setter){
+async function getFilters(setter) {
   const req = await fetch(
     `https://book-memory-sections-out.itlabs.top/api/members/filters/get`
   );
   const res = await req.json();
   setter(res);
-  
 }
 
 export { ScrollHandler, getData, getHero, getFilters };

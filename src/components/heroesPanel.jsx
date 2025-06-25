@@ -3,36 +3,45 @@ import { getData, ScrollHandler } from "../logic";
 import image from "../media/image.png";
 import { Link } from "react-router";
 
-export function HeroesPanel({ heroesFilter }) {
+export function HeroesPanel({ heroesFilter, sethCount }) {
   const [heroes, setHeroes] = useState([]);
-  // const [page, setPage] = useState(2);
-  // const [fetching, setFetching] = useState(false);
+  const [page, setPage] = useState(1);
+  const [fetching, setFetching] = useState(false);
   const panelWidth = Math.floor(heroes.length / 2);
 
   useEffect(() => {
-    getData(setHeroes);
+    getData(setHeroes, page, setPage, heroesFilter);
   }, [heroesFilter]);
 
-  // useEffect(() => {
-  //   if (!fetching) {
-  //     return;
-  //   }
-  //   fetch(
-  //     `https://book-memory-sections-out.itlabs.top/api/members${`?page=${page}&itemPerPage=15`}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((res) => {        
-  //       setHeroes((prev) => [...prev, ...res]);
-  //       setPage((prev) => prev + 1);
-  //     })
-  //     .finally(() => setFetching(false));
-  // }, [fetching, page, setPage]);
+  useEffect(() => {
+    if (!fetching) {
+      return;
+    }
+
+    fetch(
+      encodeURI(
+        `https://book-memory-sections-out.itlabs.top/api/members?page=${page}&itemsPerPage=16${
+          heroesFilter.searchFrom ? "&yearStart=" + heroesFilter.searchFrom : ""
+        }${heroesFilter.searchTo ? "&yearEnd=" + heroesFilter.searchTo : ""}${
+          heroesFilter.chosenRanks[0] ? "&ranks=" + heroesFilter.chosenRanks : ""
+        }${heroesFilter.chosenWord ? "&word=" + heroesFilter.chosenWord : ""}${
+          heroesFilter.filterName ? "&name=" + heroesFilter.filterName : ""
+        }`
+      )
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setHeroes((prev) => [...prev, ...res]);
+        setPage((prev) => prev + 1);
+      })
+      .finally(() => setFetching(false));
+  }, [fetching, page, heroesFilter]);
 
   return heroes.length > 0 ? (
     <div
       className="overflow-x-scroll"
       onScroll={(e) => {
-        ScrollHandler(e);
+        ScrollHandler(e, setFetching);
       }}
     >
       <div className="h-[570px] flex w-fit">
@@ -44,7 +53,10 @@ export function HeroesPanel({ heroesFilter }) {
           <div className="bg-linear-to-t from-0% from-[#262421] to-30% to-[rgba(38, 36, 33, 0)] z-10 absolute inset-0"></div>
           <h3 className="pb-6 px-6 z-10">{heroes[0]?.name}</h3>
         </div>
-        <div className={`grid grid-rows-2 gap-y-4`} style={{gridTemplateColumns: `repeat(${panelWidth}, 250px)`}}>
+        <div
+          className={`grid grid-rows-2 gap-y-4`}
+          style={{ gridTemplateColumns: `repeat(${panelWidth}, 250px)` }}
+        >
           {heroes.map((item, id) => {
             if (id === 0) return;
             return (

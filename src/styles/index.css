@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,14 +14,8 @@
 
 @theme {
   --animate-asideOpening: 1s ease-out asideOpening;
-  @keyframes asideOpening {
-    0%:{
-      transform: translate(-508px);
-    }
-    100%{
-      transform: translate(0px);
-    }
-  }
+  --font-montserrat: "Montserrat", sans-serif;
+  --drop-shadow-keyboard: 0px 2px 0px rgba(0,0,0,0.1)
 }
 
 html{

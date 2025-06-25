@@ -14,7 +14,7 @@ function SearchPage({ filterString }) {
       }`}
     >
       <form
-        className={`text-white ${isSearching ? "mb-[70px]" : "mb-[250px]"}`}
+        className={`text-white`}
         onSubmit={(e) => {
           e.preventDefault();
           filterString((prev) => ({ ...prev, filterName: searchText }));
@@ -29,22 +29,22 @@ function SearchPage({ filterString }) {
           onClick={() => setIsSearching(true)}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="bg-none border-b-2 text-[32px] border-b-[#C1A886] italic placeholder:text-white focus:outline-0 w-[872px] py-4 px-8 relative text-white after:"
+          className={`${isSearching ? "mb-[70px]" : "mb-[250px]"} bg-none border-b-2 text-[32px] border-b-[#C1A886] italic placeholder:text-white focus:outline-0 w-[872px] py-4 px-8 relative text-white after:`}
           placeholder="Кого вы ищите?"
         ></input>
-      </form>
+      
       {isSearching ? (
-        <VirtualKeyboard isSearching={setIsSearching}></VirtualKeyboard>
+        <VirtualKeyboard isSearching={setIsSearching} searchText={setSearchText}></VirtualKeyboard>
       ) : (
         <Link to="/">
           <UIButton
             variant={"unactive"}
-            className={"w-[576px] border-white text-white"}
+            className={"w-[576px] border-white text-white mx-auto"}
           >
             НА ГЛАВНУЮ
           </UIButton>
         </Link>
-      )}
+      )}</form>
     </div>
   );
 }
