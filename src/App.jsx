@@ -13,6 +13,7 @@ function App() {
     searchTo: "",
     chosenRanks: [],
     chosenWord: "",
+    page: 1
   });
   return (
     <Routes>

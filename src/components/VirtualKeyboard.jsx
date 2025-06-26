@@ -77,7 +77,7 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
               ))}
               <button
                 className="drop-shadow-keyboard bg-[#EBEBEB] rounded-lg p-3 text-[18px] flex items-center justify-center text-nowrap box-border tracking-[2px] w-[104px] h-[48px]"
-                onClick={() => searchText((prev) => prev.slice(0, -1))}
+                onClick={() => searchText((prev) => prev.toString().slice(0, -1))}
               >
                 <img src={deleteB} alt="Удалить букву" />
               </button>
@@ -94,9 +94,9 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
                 key={word}
                 type="button"
                 className="text-center p-3 drop-shadow-keyboard bg-white rounded-lg w-[65px] h-[48px] text-[18px] font-montserrat"
-                onClick={() => searchText((prev) => [...prev, word].join(""))}
+                onClick={() => searchText((prev) => [...prev.toString(), word].join(""))}
               >
-                {isCapital ? word.toUpperCase() : word}
+                {word}
               </button>
             ))}
             <button

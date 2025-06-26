@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { closeCross } from "../media/";
 import { UIButton } from "../ui";
 import { getFilters } from "../logic";
 import { VirtualKeyboard } from "./VirtualKeyboard";
+import { setEndValueCustomSlider, setStartValueCustomSlider } from "../slider";
 
 function closing(e, setState) {
   if (e.target.closest("#keyboard") || e.target.closest("#keyboardClose")) {
@@ -14,10 +15,14 @@ function closing(e, setState) {
 }
 
 export function Aside({ setIsOpenState, setMainFilters }) {
+  const thumbLeft = useRef(null);
+  const thumbRight = useRef(null);
+  const rangeBetween = useRef(null);
+
   const [filters, setFilters] = useState(); // запрос к серверу для получения фильтров
   const [search, setSearch] = useState(false);
-  const [searchFrom, setSearchFrom] = useState("");
-  const [searchTo, setSearchTo] = useState("");
+  const [searchFrom, setSearchFrom] = useState(1870);
+  const [searchTo, setSearchTo] = useState(2025);
   const [expand, setExpand] = useState(false);
   const [chosenRanks, setChosenRanks] = useState([]);
   const [chosenWord, setChosenWord] = useState("");
@@ -25,22 +30,41 @@ export function Aside({ setIsOpenState, setMainFilters }) {
   useEffect(() => {
     getFilters(setFilters);
   }, []);
+  useEffect(()=>{
+    if(searchTo <= searchFrom - 10) return; 
+    setStartValueCustomSlider(
+      searchFrom,
+      searchTo,
+      thumbLeft.current,
+      rangeBetween.current,
+    )
+  },[searchFrom, searchTo])
+  useEffect(()=>{
+    if(searchTo + 10 <= searchFrom) return; 
+    setEndValueCustomSlider(
+      searchFrom,
+      searchTo,
+      thumbRight.current,
+      rangeBetween.current,
+    );
+  },[searchTo, searchFrom])
 
   function Validate() {
     // * сделать регулярное выражение
     const REGEX = "d";
-    if(REGEX === "") {
+    if (REGEX === "" || searchFrom >= searchTo) {
+      return;
+    } else {
       setMainFilters((prev) => ({
-      ...prev,
-      isFiltered: true,
-      searchFrom: searchFrom,
-      searchTo: searchTo,
-      chosenRanks: chosenRanks.join(","),
-      chosenWord: chosenWord,
-    }));
-    setIsOpenState(false)
-    }else{
-      return
+        ...prev,
+        isFiltered: true,
+        searchFrom: searchFrom,
+        searchTo: searchTo,
+        chosenRanks: chosenRanks.join(","),
+        chosenWord: chosenWord,
+        page: 1
+      }));
+      setIsOpenState(false);
     }
   }
   return (
@@ -64,25 +88,57 @@ export function Aside({ setIsOpenState, setMainFilters }) {
           }}
         >
           <h3 className="mt-11">ДАТА РОЖДЕНИЯ</h3>
-          <input type="range" />
-          <div className="flex justify-between">
-            <input
-              type="text"
-              className="w-[184px] h-[53px] p-4 border-[#514F4D] text-[#2B2A29] placeholder:text-inherit border focus:outline-none"
-              value={searchFrom}
-              onChange={(e) => setSearchFrom(e.target.value)}
-              onClick={() => setSearch("From")}
-              placeholder="1940"
-            />
-            <input
-              type="text"
-              className="w-[184px] h-[53px] p-4 border-[#514F4D] text-[#2B2A29] placeholder:text-inherit border focus:outline-none"
-              value={searchTo}
-              onChange={(e) => setSearchTo(e.target.value)}
-              onClick={() => setSearch("To")}
-              placeholder="1991"
-            />
+          <div className="wrapper">
+            <div className="range-slider">
+              <input
+                type="range"
+                min="1870"
+                value={searchFrom}
+                max="2024"
+                id="Start"
+                onInput={(e) => {
+                  searchFrom < searchTo-10 ? setSearchFrom(e.target.value) : "";
+                }
+              }
+              />
+              <input
+                type="range"
+                min="1871"
+                value={searchTo}
+                max="2025"
+                id="End"
+                onInput={(e) =>{
+                  searchFrom < searchTo-10 ? setSearchTo(e.target.value) : "";
+                }
+                }
+              />
+
+              <div className="track-wrapper">
+                <div className="track"></div>
+                <div className="range-between" ref={rangeBetween}></div>
+                <div className="thumb left" ref={thumbLeft}></div>
+                <div className="thumb right" ref={thumbRight}></div>
+              </div>
+            </div>
           </div>
+            <div className="flex justify-between">
+              <input
+                type="text"
+                className="w-[184px] h-[53px] p-4 border-[#514F4D] text-[#2B2A29] placeholder:text-inherit border focus:outline-none"
+                value={searchFrom}
+                onChange={(e) => setSearchFrom(e.target.value)}
+                onClick={() => setSearch("From")}
+                placeholder="1940"
+              />
+              <input
+                type="text"
+                className="w-[184px] h-[53px] p-4 border-[#514F4D] text-[#2B2A29] placeholder:text-inherit border focus:outline-none"
+                value={searchTo}
+                onChange={(e) => setSearchTo(e.target.value)}
+                onClick={() => setSearch("To")}
+                placeholder="2025"
+              />
+            </div>
           <h3 className="mb-4 mt-8">ЗВАНИЕ</h3>
           <ul
             className={`overflow-y-scroll ${

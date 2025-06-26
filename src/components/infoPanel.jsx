@@ -42,6 +42,7 @@ export function InfoPanel({
               searchTo: "",
               chosenRanks: [],
               chosenWord: "",
+              page: 1
             })
           }
         >

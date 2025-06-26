@@ -29,8 +29,8 @@ async function getData(
   const req = await fetch(
     encodeURI(
         `https://book-memory-sections-out.itlabs.top/api/members?page=${page}&itemsPerPage=16${
-          searchFrom ? "&yearStart=" + searchFrom : ""
-        }${searchTo ? "&yearEnd=" + searchTo : ""}${
+          searchFrom ? "&yearStart=" + searchFrom.toString() : ""
+        }${searchTo ? "&yearEnd=" + searchTo.toString() : ""}${
           chosenRanks[0] ? "&ranks=" + chosenRanks : ""
         }${chosenWord ? "&word=" + chosenWord : ""}${
           filterName ? "&name=" + filterName : ""
