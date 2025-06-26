@@ -7,7 +7,9 @@ export function InfoPanel({
   heroesFilter,
   setHeroesFilter,
   heroesCount,
+  scrollHand
 }) {
+  
   return (
     <div className="flex items-center gap-4 tracking-[2px] mb-10">
       <Link to="search">
@@ -42,7 +44,7 @@ export function InfoPanel({
               searchTo: "",
               chosenRanks: [],
               chosenWord: "",
-              page: 1
+              page: 1,
             })
           }
         >
@@ -72,6 +74,7 @@ export function InfoPanel({
           src={move}
           alt="двигать"
           className="absolute -bottom-1 w-14 h-14 scrollHand"
+          ref={scrollHand}
         ></img>
       </div>
     </div>

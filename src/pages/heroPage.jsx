@@ -3,9 +3,10 @@ import { medal } from "../media";
 import image from "../media/image.png";
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { getHero } from "../logic";
+import { getHero } from "../logic/connections";
+
 function HeroPage() {
-  const { id } = useParams();
+  const { id } = useParams(); // получение данных из строки поиска
   const [heroData, setHeroData] = useState({});
   useEffect(() => {
     getHero(`${id}`, setHeroData);

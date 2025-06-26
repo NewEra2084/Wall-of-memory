@@ -12,8 +12,7 @@ function App() {
     searchFrom: "",
     searchTo: "",
     chosenRanks: [],
-    chosenWord: "",
-    page: 1
+    chosenWord: ""
   });
   return (
     <Routes>
