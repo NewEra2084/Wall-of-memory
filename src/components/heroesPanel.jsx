@@ -5,12 +5,12 @@ import { Link } from "react-router";
 
 export function HeroesPanel({ heroesFilter, sethCount }) {
   const [heroes, setHeroes] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [fetching, setFetching] = useState(false);
   const panelWidth = Math.floor(heroes.length / 2);
 
   useEffect(() => {
-    getData(setHeroes, page, setPage, heroesFilter);
+    getData(setHeroes, heroesFilter);
   }, [heroesFilter]);
   useEffect(() => sethCount(()=>heroes.length), [heroes]);
 

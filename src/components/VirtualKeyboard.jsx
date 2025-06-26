@@ -40,7 +40,13 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
                   key={word}
                   type="button"
                   className="text-center p-3 drop-shadow-keyboard bg-white rounded-lg w-[65px] h-[48px] text-[18px] font-montserrat"
-                  onClick={() => searchText((prev) => isCapital ? [...prev, word.toUpperCase()].join("") : [...prev, word].join(""))}
+                  onClick={() =>
+                    searchText((prev) =>
+                      isCapital
+                        ? [...prev, word.toUpperCase()].join("")
+                        : [...prev, word].join("")
+                    )
+                  }
                 >
                   {isCapital ? word.toUpperCase() : word}
                 </button>
@@ -52,7 +58,13 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
                   key={word}
                   type="button"
                   className="text-center p-3 drop-shadow-keyboard bg-white rounded-lg w-[65px] h-[48px] text-[18px] font-montserrat"
-                  onClick={() => searchText((prev) => isCapital ? [...prev, word.toUpperCase()].join("") : [...prev, word].join(""))}
+                  onClick={() =>
+                    searchText((prev) =>
+                      isCapital
+                        ? [...prev, word.toUpperCase()].join("")
+                        : [...prev, word].join("")
+                    )
+                  }
                 >
                   {isCapital ? word.toUpperCase() : word}
                 </button>
@@ -62,6 +74,7 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
               <button
                 className="drop-shadow-keyboard bg-[#EBEBEB] rounded-lg p-3 text-[18px] flex items-center justify-center text-nowrap box-border tracking-[2px] w-[104px] h-[48px]"
                 onClick={() => setisCapital((prev) => !prev)}
+                type="button"
               >
                 <img src={shift} alt="Заглавные буквы" />
               </button>
@@ -70,14 +83,23 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
                   key={word}
                   type="button"
                   className="text-center p-3 drop-shadow-keyboard bg-white rounded-lg w-[65px] h-[48px] text-[18px] font-montserrat"
-                  onClick={() => searchText((prev) => isCapital ? [...prev, word.toUpperCase()].join("") : [...prev, word].join(""))}
+                  onClick={() =>
+                    searchText((prev) =>
+                      isCapital
+                        ? [...prev, word.toUpperCase()].join("")
+                        : [...prev, word].join("")
+                    )
+                  }
                 >
                   {isCapital ? word.toUpperCase() : word}
                 </button>
               ))}
               <button
+                type="button"
                 className="drop-shadow-keyboard bg-[#EBEBEB] rounded-lg p-3 text-[18px] flex items-center justify-center text-nowrap box-border tracking-[2px] w-[104px] h-[48px]"
-                onClick={() => searchText((prev) => prev.toString().slice(0, -1))}
+                onClick={() =>
+                  searchText((prev) => prev.toString().slice(0, -1))
+                }
               >
                 <img src={deleteB} alt="Удалить букву" />
               </button>
@@ -86,23 +108,31 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
         ) : (
           <div className="flex gap-2 mb-2">
             <button
+              type="button"
               className="drop-shadow-keyboard bg-[#EBEBEB] rounded-lg p-3 text-[18px] flex items-center justify-center text-nowrap box-border tracking-[2px] w-[104px] h-[48px]"
-              onClick={() => setisCapital((prev) => !prev)} 
-            ><img src={shift} alt="Заглавные буквы" /></button>
+              onClick={() => setisCapital((prev) => !prev)}
+            >
+              <img src={shift} alt="Заглавные буквы" />
+            </button>
             {alphabet.numbersLine.map((word) => (
               <button
                 key={word}
                 type="button"
                 className="text-center p-3 drop-shadow-keyboard bg-white rounded-lg w-[65px] h-[48px] text-[18px] font-montserrat"
-                onClick={() => searchText((prev) => [...prev.toString(), word].join(""))}
+                onClick={() =>
+                  searchText((prev) => [...prev.toString(), word].join(""))
+                }
               >
                 {word}
               </button>
             ))}
             <button
               className="drop-shadow-keyboard bg-[#EBEBEB] rounded-lg p-3 text-[18px] flex items-center justify-center text-nowrap box-border tracking-[2px] w-[104px] h-[48px]"
+              type="button"
               onClick={() => searchText((prev) => prev.slice(0, -1))}
-            ><img src={deleteB} alt="Удалить букву" /></button>
+            >
+              <img src={deleteB} alt="Удалить букву" />
+            </button>
           </div>
         )}
         <div className="flex gap-2 font-montserrat">
@@ -122,6 +152,7 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
             <img src={language} alt="" />
           </button>
           <button
+            type="button"
             onClick={() => searchText((prev) => [...prev, " "].join(""))}
             className="drop-shadow-keyboard bg-white rounded-lg p-3 text-[18px] flex items-center justify-center text-nowrap box-border tracking-[2px] w-[100%]"
           >

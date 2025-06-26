@@ -16,7 +16,7 @@ function ScrollHandler(e, setter) {
 }
 
 async function getData(
-  setter,page, setPage,
+  setter,
   {
     filterName = "",
     searchFrom = "",
@@ -28,7 +28,7 @@ async function getData(
   
   const req = await fetch(
     encodeURI(
-        `https://book-memory-sections-out.itlabs.top/api/members?page=${page}&itemsPerPage=16${
+        `https://book-memory-sections-out.itlabs.top/api/members?page=1&itemsPerPage=16${
           searchFrom ? "&yearStart=" + searchFrom.toString() : ""
         }${searchTo ? "&yearEnd=" + searchTo.toString() : ""}${
           chosenRanks[0] ? "&ranks=" + chosenRanks : ""
@@ -38,7 +38,6 @@ async function getData(
       )
   );
   const res = await req.json();
-  setPage((prev)=> prev + 1)
   setter(res);
 }
 async function getHero(id, setter) {
