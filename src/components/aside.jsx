@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { closeCross } from "../media/";
 import { UIButton } from "../ui";
 import { getFilters } from "../logic";
-import { checkbox } from "../media";
 import { VirtualKeyboard } from "./VirtualKeyboard";
 
 function closing(e, setState) {
@@ -28,7 +27,10 @@ export function Aside({ setIsOpenState, setMainFilters }) {
   }, []);
 
   function Validate() {
-    setMainFilters((prev) => ({
+    // * сделать регулярное выражение
+    const REGEX = "d";
+    if(REGEX === "") {
+      setMainFilters((prev) => ({
       ...prev,
       isFiltered: true,
       searchFrom: searchFrom,
@@ -37,6 +39,9 @@ export function Aside({ setIsOpenState, setMainFilters }) {
       chosenWord: chosenWord,
     }));
     setIsOpenState(false)
+    }else{
+      return
+    }
   }
   return (
     <div
@@ -89,8 +94,9 @@ export function Aside({ setIsOpenState, setMainFilters }) {
                   return (
                     <label className="flex mb-4" key={item}>
                       <input
+                        checked={chosenRanks.includes(item)}
                         type="checkbox"
-                        className={`bg-red w-6 h-6 bg-none border-[#8B8785] border mr-4 appearance-none relative bg-red after: after:bg-no-repeat after:bg-[url(${checkbox})]`}
+                        className={`bg-red w-6 h-6 bg-none border-[#8B8785] border mr-4 appearance-none before:bg-[#CF3337] before:absolute checked:before:inset-0 relative after:absolute checked:after:inset-0 after:z-10 after:bg-cover after:bg-no-repeat checkedAfter checked:border-none`}
                         onChange={(e) => {
                           e.target.checked
                             ? setChosenRanks((prev) => [...prev, item])
@@ -108,7 +114,8 @@ export function Aside({ setIsOpenState, setMainFilters }) {
                     <label className="flex mb-4 last:mb-0" key={item}>
                       <input
                         type="checkbox"
-                        className={`bg-red w-6 h-6 bg-none border-[#8B8785] border mr-4  relative bg-red after: after:bg-no-repeat after:bg-[url(${checkbox})]`}
+                        checked={chosenRanks.includes(item)}
+                        className={`bg-red w-6 h-6 bg-none border-[#8B8785] border mr-4 appearance-none before:bg-[#CF3337] before:absolute checked:before:inset-0 relative after:absolute checked:after:inset-0 after:z-10 after:bg-cover after:bg-no-repeat checkedAfter checked:border-none`}
                         onChange={(e) => {
                           e.target.checked
                             ? setChosenRanks((prev) => [...prev, item])
@@ -163,9 +170,11 @@ export function Aside({ setIsOpenState, setMainFilters }) {
             variant={"unactive"}
             className={"w-[100%]"}
             onClick={() => {
-              setChosenWord(null);
+              setChosenWord("");
               setSearchFrom("");
               setSearchTo("");
+              setChosenRanks([]);
+              setExpand(false);
             }}
           >
             ОЧИСТИТЬ

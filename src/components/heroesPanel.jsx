@@ -12,6 +12,7 @@ export function HeroesPanel({ heroesFilter, sethCount }) {
   useEffect(() => {
     getData(setHeroes, page, setPage, heroesFilter);
   }, [heroesFilter]);
+  useEffect(() => sethCount(()=>heroes.length), [heroes]);
 
   useEffect(() => {
     if (!fetching) {
@@ -23,7 +24,9 @@ export function HeroesPanel({ heroesFilter, sethCount }) {
         `https://book-memory-sections-out.itlabs.top/api/members?page=${page}&itemsPerPage=16${
           heroesFilter.searchFrom ? "&yearStart=" + heroesFilter.searchFrom : ""
         }${heroesFilter.searchTo ? "&yearEnd=" + heroesFilter.searchTo : ""}${
-          heroesFilter.chosenRanks[0] ? "&ranks=" + heroesFilter.chosenRanks : ""
+          heroesFilter.chosenRanks[0]
+            ? "&ranks=" + heroesFilter.chosenRanks
+            : ""
         }${heroesFilter.chosenWord ? "&word=" + heroesFilter.chosenWord : ""}${
           heroesFilter.filterName ? "&name=" + heroesFilter.filterName : ""
         }`

@@ -37,3 +37,8 @@ body {
 .scrollPanel::-webkit-scrollbar{
   display: none;
 }
+.checkedAfter::after{
+  background: url("../media/checkbox.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}

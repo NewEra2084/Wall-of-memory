@@ -25,7 +25,6 @@ async function getData(
     chosenWord = "",
   }
 ) {
-  console.log(page);
   
   const req = await fetch(
     encodeURI(
