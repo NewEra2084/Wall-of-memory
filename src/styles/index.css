@@ -17,8 +17,18 @@
 
 @theme {
   --animate-asideOpening: 1s ease-out asideOpening;
+
   --font-montserrat: "Montserrat", sans-serif;
+
   --drop-shadow-keyboard: 0px 2px 0px rgba(0, 0, 0, 0.1);
+
+  --color-red-primary: #792426;
+  --color-red-accent: #cf3337;
+  --color-red-third: #ef7a7d;
+
+  --color-black-primary: #2b2a29;
+  --color-black-accent: #514f4d;
+  --color-black-third: #8b8785;
 }
 
 html {
@@ -30,7 +40,7 @@ body {
   font-family: "Times New Roman", Times, serif;
 }
 .bg {
-  background: url("../media/bg.png");
+  background: url("./public/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -45,7 +55,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-
+/* кастомный range инпут */
 .wrapper {
   max-width: 100%;
   margin: 20px 0 60px 0;

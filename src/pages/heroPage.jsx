@@ -1,9 +1,45 @@
 import { UIButton } from "../ui";
 import { medal } from "../media";
-import image from "../media/image.png";
+import image from "../../public/image.png";
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { getHero } from "../logic/connections";
+
+const HeroInfoPunct = ({ heroData, children }) => {
+  return (
+    <div>
+      <h3 className="text-red-primary text-[32px] font-bold italic">
+        {children}
+      </h3>
+      <h5 className="text-[24px]">
+        {(heroData.data ? heroData.data + " " : "") +
+          (heroData.dataTwo ? heroData.dataTwo + " " : "") +
+          (heroData.data ? heroData?.postfix || "" : "") || "Неизвестно"}
+      </h5>
+    </div>
+  );
+};
+const ButtonsBlock = ({ heroData }) => {
+  return (
+    <>
+      <div className="flex tracking-[2px] text-black-accent gap-4 mb-4 mt-[100px]">
+        <Link to={"/"}>
+          <UIButton variant={"unactive"} className={"w-[428px]"}>
+            НА ГЛАВНУЮ
+          </UIButton>
+        </Link>
+        <Link to={`/hero/${heroData.next}`}>
+          <UIButton variant={"active"} className={"w-[428px]"}>
+            <img src={medal} alt="медаль"></img> СЛЕДУЮЩИЙ ГЕРОЙ
+          </UIButton>
+        </Link>
+      </div>
+      <p>
+        Для стены памяти информация получена от родных, близких и друзей героев
+      </p>
+    </>
+  );
+};
 
 function HeroPage() {
   const { id } = useParams(); // получение данных из строки поиска
@@ -13,7 +49,7 @@ function HeroPage() {
   }, [id]);
   return (
     <>
-      <hr className="border-2 border-[#8B8785] mr-20" />
+      <hr className="border-2 border-black-third mr-20" />
       <div className="flex justify-between pt-11 pr-20">
         <div>
           <h2 className="text-[48px] font-bold mb-10">
@@ -21,80 +57,42 @@ function HeroPage() {
           </h2>
           <div className="flex flex-col gap-y-4">
             <div className="flex gap-[72px]">
-              <div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Год рождения
-                </h3>
-                <h5 className="text-[24px]">
-                  {heroData.yearStartAt || "Неизвестно"} г.
-                </h5>
-              </div>
-              <div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Место рождения
-                </h3>
-                <h5 className="text-[24px]">{heroData.city || "Неизвестно"}</h5>
-              </div>
+              <HeroInfoPunct
+                heroData={{ data: heroData.yearStartAt, postfix: "г." }}
+              >
+                Дата рождения
+              </HeroInfoPunct>
+              <HeroInfoPunct heroData={{ data: heroData.city }}>
+                Место рождения
+              </HeroInfoPunct>
             </div>
             <div className="flex gap-[72px]">
-              <div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Звание
-                </h3>
-                <h5 className="text-[24px]">
-                  {heroData.ranks || "Неизвестно"}
-                </h5>
-              </div>
-              <div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Призван в армию
-                </h3>
-                <h5 className="text-[24px]">
-                  {heroData.calledUponDate || "Неизвестно"}
-                </h5>
-              </div>
-              <div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Как погиб
-                </h3>
-                <h5 className="text-[24px]">
-                  {heroData.howDie || "Неизвестно"}
-                </h5>
-              </div>
+              <HeroInfoPunct heroData={{ data: heroData.ranks }}>
+                Звание
+              </HeroInfoPunct>
+              <HeroInfoPunct heroData={{ data: heroData.calledUponDate }}>
+                Призван в армию
+              </HeroInfoPunct>
+              <HeroInfoPunct heroData={{ data: heroData.howDie }}>
+                Как погиб
+              </HeroInfoPunct>
             </div>
             <div className="flex gap-[72px]">
-              <div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Место гибели (захоронение)
-                </h3>
-                <h5 className="text-[24px]">
-                  {heroData.placeDeath || "Неизвестно"}
-                </h5></div><div>
-                <h3 className="text-[#792426] text-[32px] font-bold italic">
-                  Дата гибели
-                </h3>
-                <h5 className="text-[24px]">
-                  {heroData.monthDeath} {heroData.yearEndAt || "Неизвестно"}
-                </h5>
-              </div>
+              <HeroInfoPunct heroData={{ data: heroData.placeDeath }}>
+                Место гибели (захоронение)
+              </HeroInfoPunct>
+              <HeroInfoPunct
+                heroData={{
+                  data: heroData.monthDeath,
+                  dataTwo: heroData.yearEndAt,
+                  postfix: "г.",
+                }}
+              >
+                Дата гибели
+              </HeroInfoPunct>
             </div>
           </div>
-          <div className="flex tracking-[2px] text-[#2B2A29] gap-4 mb-4 mt-[100px]">
-            <Link to={"/"}>
-              <UIButton variant={"unactive"} className={"w-[428px]"}>
-                НА ГЛАВНУЮ
-              </UIButton>
-            </Link>
-            <Link to={`/hero/${heroData.next}`}>
-              <UIButton variant={"active"} className={"w-[428px]"}>
-                <img src={medal} alt="медаль"></img> СЛЕДУЮЩИЙ ГЕРОЙ
-              </UIButton>
-            </Link>
-          </div>
-          <p>
-            Для стены памяти информация получена от родных, близких и друзей
-            героев
-          </p>
+          <ButtonsBlock heroData={heroData} />
         </div>
         <img src={image} alt="Фото героя" className="w-[428px] h-[571px]" />
       </div>
