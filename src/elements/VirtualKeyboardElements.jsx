@@ -28,7 +28,7 @@ const BaseLine = ({ searchText, isCapital, num }) => {
   );
 };
 
-const EventLine = ({ searchText, isCapital, setisCapital, num }) => {
+const EventLine = ({ searchText, isCapital, setisCapital, isNumeric, num }) => {
   return (
     <>
       <div className="flex gap-2 mb-2">
@@ -43,7 +43,7 @@ const EventLine = ({ searchText, isCapital, setisCapital, num }) => {
         </button>
         {num.map((word) => (
           <KeyboardButton key={word} searchText={searchText}>
-            {isCapital && !typeof num[0] === Number
+            {isCapital && !isNumeric
               ? word?.toUpperCase()
               : word}
           </KeyboardButton>
@@ -101,6 +101,7 @@ export function VirtualKeyboardElements({
   variant,
   searchText,
   isCapital,
+  isNumeric,
   setisCapital,
   num,
   setisNumeric,
@@ -114,6 +115,7 @@ export function VirtualKeyboardElements({
     <Line
       searchText={searchText}
       isCapital={isCapital}
+      isNumeric={isNumeric}
       num={num}
       setisCapital={setisCapital}
       setisNumeric={setisNumeric}

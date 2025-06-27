@@ -43,6 +43,7 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
             <VirtualKeyboardElements
               variant={"eventLine"}
               isCapital={isCapital}
+              isNumeric={isNumeric}
               searchText={searchText}
               num={alphabet.ruThirdLine}
               setisCapital={setisCapital}
@@ -53,6 +54,7 @@ export function VirtualKeyboard({ isSearching, searchText, className = "" }) {
             variant={"eventLine"}
             isCapital={isCapital}
             searchText={searchText}
+            isNumeric={isNumeric}
             num={alphabet.numbersLine}
             setisCapital={setisCapital}
           />

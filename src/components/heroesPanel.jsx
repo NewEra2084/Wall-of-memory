@@ -25,7 +25,7 @@ export function HeroesPanel({ heroesFilter, sethCount, scrollHand }) {
 
   return (
     <div
-      className="overflow-x-scroll"
+      className="overflow-x-scroll scrollPanel"
       onScroll={(e) => {
         ScrollHandler(e, setFetching, scrollHand);
       }}
