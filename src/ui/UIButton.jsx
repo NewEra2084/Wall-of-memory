@@ -10,6 +10,7 @@
  */
 
 export function UIButton({ type="button", className, variant, size, padding, onClick, children }) {
+  // стили применяются в зависимости от указанного варианта
   const variantOfButton = {
     active: "bg-[#CF3337] text-white",
     unactive: "border bg-none border-[#514F4D] text-[#514F4D]",

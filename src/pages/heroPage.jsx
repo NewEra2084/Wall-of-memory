@@ -8,9 +8,11 @@ import { getHero } from "../logic/connections";
 const HeroInfoPunct = ({ heroData, children }) => {
   return (
     <div>
+      {/* название поля */}
       <h3 className="text-red-primary text-[32px] font-bold italic">
         {children}
       </h3>
+      {/* отображение данных, если есть, или Неизвестно */}
       <h5 className="text-[24px]">
         {(heroData.data ? heroData.data + " " : "") +
           (heroData.dataTwo ? heroData.dataTwo + " " : "") +
