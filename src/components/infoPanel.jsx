@@ -81,7 +81,7 @@ export function InfoPanel({
       )}
       {/* handScroller */}
       <div
-        className={`relative h-[50px] w-[100%] bg-[url(./public/vector.png)] bg-repeat-x bg-center`}
+        className={`relative h-[50px] w-[100%] bg-[url(../media/vector.png)] bg-repeat-x bg-center`}
       >
         <img
           src={move}

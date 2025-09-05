@@ -80,7 +80,7 @@ export function Aside({ setIsOpenState, setMainFilters }) {
       onClick={(e) => closing(e, setIsOpenState)}
     >
       <aside
-        className="w-[508px] bg-[url('./public/bgFilters.png')] bg-no-repeat bg-cover h-[100%] animate-asideOpening pl-20 pr-10 py-10 text-[24px] text-black-accent"
+        className="w-[508px] bg-[url('../media/bgFilters.png')] bg-no-repeat bg-cover h-[100%] animate-asideOpening pl-20 pr-10 py-10 text-[24px] text-black-accent"
         id="aside"
       >
         <div className="flex justify-between mb-4">

@@ -1,6 +1,6 @@
 import { UIButton } from "../ui";
 import { medal } from "../media";
-import image from "../../public/image.png";
+import image from "../media/image.png";
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { getHero } from "../logic/connections";

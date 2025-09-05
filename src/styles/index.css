@@ -40,7 +40,7 @@ body {
   font-family: "Times New Roman", Times, serif;
 }
 .bg {
-  background: url("./public/bg.png");
+  background: url("../media/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
 }

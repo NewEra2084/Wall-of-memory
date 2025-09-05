@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import image from "../../public/image.png";
+import image from "../media/image.png";
 
 export function HeroCard({ item, to, variant = "small" }) {
   return variant === "small" ? (
